@@ -344,8 +344,8 @@ uint8_t plan_buffer_line(float *target, plan_line_data_t *pl_data)
   #ifdef COREXY
     target_steps[A_MOTOR] = lround(target[A_MOTOR]*settings.steps_per_mm[A_MOTOR]);
     target_steps[B_MOTOR] = lround(target[B_MOTOR]*settings.steps_per_mm[B_MOTOR]);
-    block->steps[A_MOTOR] = labs((target_steps[X_AXIS]-position_steps[X_AXIS]) + (target_steps[Y_AXIS]-position_steps[Y_AXIS]));
-    block->steps[B_MOTOR] = labs((target_steps[X_AXIS]-position_steps[X_AXIS]) - (target_steps[Y_AXIS]-position_steps[Y_AXIS]));
+    block->steps[A_MOTOR] = labs((0.908)*(target_steps[X_AXIS]-position_steps[X_AXIS]) + (0.289025)*(target_steps[Y_AXIS]-position_steps[Y_AXIS]));
+    block->steps[B_MOTOR] = labs((-0.289025)*(target_steps[X_AXIS]-position_steps[X_AXIS]) + (0.908)*(target_steps[Y_AXIS]-position_steps[Y_AXIS]));
   #endif
 
   for (idx=0; idx<N_AXIS; idx++) {
@@ -359,9 +359,9 @@ uint8_t plan_buffer_line(float *target, plan_line_data_t *pl_data)
       }
       block->step_event_count = max(block->step_event_count, block->steps[idx]);
       if (idx == A_MOTOR) {
-        delta_mm = (target_steps[X_AXIS]-position_steps[X_AXIS] + target_steps[Y_AXIS]-position_steps[Y_AXIS])/settings.steps_per_mm[idx];
+        delta_mm = ((0.908)*(target_steps[X_AXIS]-position_steps[X_AXIS]) + (0.289025)*(target_steps[Y_AXIS]-position_steps[Y_AXIS]))/settings.steps_per_mm[idx];
       } else if (idx == B_MOTOR) {
-        delta_mm = (target_steps[X_AXIS]-position_steps[X_AXIS] - target_steps[Y_AXIS]+position_steps[Y_AXIS])/settings.steps_per_mm[idx];
+        delta_mm = ((-0.289025)*(target_steps[X_AXIS]-position_steps[X_AXIS]) + (0.908)*(target_steps[Y_AXIS]-position_steps[Y_AXIS]))/settings.steps_per_mm[idx];
       } else {
         delta_mm = (target_steps[idx] - position_steps[idx])/settings.steps_per_mm[idx];
       }

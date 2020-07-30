@@ -321,11 +321,11 @@ void system_convert_array_steps_to_mpos(float *position, int32_t *steps)
 #ifdef COREXY
   int32_t system_convert_corexy_to_x_axis_steps(int32_t *steps)
   {
-    return( (steps[A_MOTOR] + steps[B_MOTOR])/2 );
+    return( steps[A_MOTOR] - (0.318309)*steps[B_MOTOR] );
   }
   int32_t system_convert_corexy_to_y_axis_steps(int32_t *steps)
   {
-    return( (steps[A_MOTOR] - steps[B_MOTOR])/2 );
+    return( (0.318309)*steps[A_MOTOR] + steps[B_MOTOR] );
   }
 #endif
 

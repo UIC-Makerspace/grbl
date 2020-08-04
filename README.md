@@ -1,6 +1,12 @@
 ![GitHub Logo](https://github.com/gnea/gnea-Media/blob/master/Grbl%20Logo/Grbl%20Logo%20250px.png?raw=true)
 
 ***
+This is a modification that adds the kinematic equations for a spline drive using ACME drive screws. It simply replaces the kinematic equations for CoreXY motion with the equations for the spine system (CoreXY does a 45 degree coordinate rotation - this does a different angle). We haven't changed the names yet so everything still says "CoreXY" and it should be compiled with the #Define CoreXY active. Depending on your exact setup you may need to change motor directions. 
+
+See Equations.pdf for kinematic equations and a diagram.
+***
+
+***
 _Click the `Release` tab to download pre-compiled `.hex` files or just [click here](https://github.com/gnea/grbl/releases)_
 ***
 Grbl is a no-compromise, high performance, low cost alternative to parallel-port-based motion control for CNC milling. This version of Grbl runs on an Arduino with a 328p processor (Uno, Duemilanove, Nano, Micro, etc).
